@@ -319,6 +319,36 @@
                     # 忽略 doc/ 目录及其所有子目录下的 .pdf 文件
                     doc/**/*.pdf
                 ```
+            21.查看提交历史
+                如果希望回顾项目的提交历史，可以使用 git log 这个简单且有效的命令
+                ```
+                    # 按时间先后顺序列出所有的提交历史，最近的提交排在最上面（q 退出）
+                    git log
+
+                    # 只展示最新的两条提交历史，数字可以按需进行填写
+                    git log -2
+
+                    # 在一行上展示最近两条提交历史的信息
+                    git log -2 --pretty=oneline
+
+                    # 在一行上展示最近两条提交历史的信息，并自定义输出的格式
+                    # %h 提交的简写哈希值    %an 作者名字    %ar 作者修订日期，按多久以前的方式显示     %s 提交说明
+                    git log -2 --pretty=format:"%h | %an | %ar | %s"
+                ```
+            22.回退到指定的版本
+                ```
+                    # 在一行上展示所有的提交历史
+                    git log --pretty=oneline
+
+                    # 使用 git reset --hard 命令，根据指定的提交ID回退到指定版本
+                    git reset --hard <CommitID>
+                    
+                    # 在旧版本中使用 git reflog --pretty=oneline 命令，查看命令操作的历史
+                    git reflog --pretty=oneline
+
+                    # 再次根据最新的提交ID，跳转到最新的版本
+                    git reset --hard <CommitID>
+                ```
         (3) Github
         (4) Git分支
      -->
