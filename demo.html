@@ -392,6 +392,21 @@
                         SSH：需要进行额外的配置；但是配置成功后，每次访问仓库时，不需重复输入Github的账号和密码
                         注意：在实际开发中，推荐使用SSH的方式访问远程仓库
                     3.基于HTTPS将本地仓库上传到Github
+                    ```
+                        …or create a new repository on the command line
+                        echo "# project_1" >> README.md
+                        git init
+                        git add README.md
+                        git commit -m "first commit"
+                        git branch -M main
+                        git remote add origin https://github.com/githubqiaodong/project_1.git
+                        git push -u origin main
+
+                        …or push an existing repository from the command line
+                        git remote add origin https://github.com/githubqiaodong/project_1.git
+                        git branch -M main
+                        git push -u origin main
+                    ```
         (4) Git分支
      -->
 </head>
