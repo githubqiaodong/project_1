@@ -232,10 +232,48 @@
 
                             modified:   demo.html
 
-
+                    # 绿色的M表示文件已修改且已放入暂存区
                     Administrator@DESKTOP-N8LVVRV MINGW64 /d/project/Exercise/06Git (master)
                     $ git status -s
                     M  demo.html
+                ```
+            14.提交已暂存的文件
+                再次运行 git commit -m "消息提交" 命令，即可将暂存区中记录的 demo.html 的快照，提交到Git仓库中进行保存：
+                ```
+                    Administrator@DESKTOP-N8LVVRV MINGW64 /d/project/Exercise/06Git (master)
+                    $ git commit -m "再次提交3"
+                    [master 2ddf66e] 再次提交3
+                    1 file changed, 43 insertions(+), 1 deletion(-)
+
+                    Administrator@DESKTOP-N8LVVRV MINGW64 /d/project/Exercise/06Git (master)
+                    $ git status
+                    On branch master
+                    nothing to commit, working tree clean
+                ```
+            15.撤销对文件的修改
+                指的是：把对工作区中对应文件的修改，还原成Git仓库中所保存的版本
+                操作的结果：所有的修改会丢失，且无法恢复！危险性比较高，请慎重操作
+                撤销操作的本质：用Git仓库中保存的文件，覆盖工作区中指定的文件
+                ```
+                    Administrator@DESKTOP-N8LVVRV MINGW64 /d/project/Exercise/06Git (master)
+                    # 撤销对文件的修改
+                    $ git checkout -- demo.html
+
+                    Administrator@DESKTOP-N8LVVRV MINGW64 /d/project/Exercise/06Git (master)
+                    $ git status
+                    On branch master
+                    nothing to commit, working tree clean
+                ```
+            16.向暂存区中一次性添加多个文件
+                如果需要被暂存的文件个数比较多，可以使用如下的命令，一次性将所有的新增和修改过的文件加入暂存区：
+                ```
+                    git add .
+                ```
+                今后在项目开发中，会经常使用这个命令，将新增和修改过后的文件加入暂存区
+            17.取消暂存的文件
+                如果需要从暂存区中移除对应的文件，可以使用如下的命令：
+                ```
+                    git reset HEAD 要移除的文件名称（如果要移除全部使用 . 号）
                 ```
         (3) Github
         (4) Git分支
