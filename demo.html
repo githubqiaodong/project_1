@@ -285,6 +285,12 @@
                 从Git仓库中移除文件的方式有两种：
                     1.从Git仓库和工作区中同时移除对应的文件
                     2.只从Git仓库中移除指定的文件，但保留工作区中对应的文件
+                ```
+                    # 从Git仓库和工作区中同时移除 test_rm.html 文件
+                    git rm -f test_rm.html
+                    # 从Git仓库中移除 test_rm.html ，但保留工作区中的 test_rm.html 文件
+                    git rm --cached test_rm.html
+                ```
         (3) Github
         (4) Git分支
      -->
