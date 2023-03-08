@@ -179,7 +179,7 @@
                     $ git status -s
                     A  demo.html
                 ```
-            11.提交跟新
+            11.提交更新
                 现在暂存区中有一个 demo.html 文件等待被提交到Git仓库中进行保存。可以执行 git commit 命令进行提交，其中 -m 选项后面是本次的提交消息，用来对提交的内容做进一步的描述：
                 提交成功之后，会显示如下信息：
                 ```
@@ -194,6 +194,48 @@
                     $ git status
                     On branch master
                     nothing to commit, working tree clean
+                ```
+            12.对已提交的文件进行修改
+                目前，demo.html 文件已被Git跟踪，并且工作区和Git仓库中的 demo.html 文件内容保持一致。当我们修改了工作区中 demo.html 的内容之后，再次运行 git status 和 git status -s 命令，会看到如下内容：
+                ```
+                    Administrator@DESKTOP-N8LVVRV MINGW64 /d/project/Exercise/06Git (master)
+                    $ git status
+                    On branch master
+                    Changes not staged for commit:
+                    (use "git add <file>..." to update what will be committed)
+                    (use "git checkout -- <file>..." to discard changes in working directory)
+
+                            modified:   demo.html
+
+                    no changes added to commit (use "git add" and/or "git commit -a")
+
+                    # 注意：修改过的、没有放入暂存区的文件前面有红色的M标记
+                    Administrator@DESKTOP-N8LVVRV MINGW64 /d/project/Exercise/06Git (master)
+                    $ git status -s
+                    M demo.html
+                ```
+                文件 demo.html 出现在 Changes not staged for commit 这行下面，说明已跟踪文件的内容发生了变化，但还没有放到暂存区
+            13.暂存已修改的文件
+                目前，工作区中的 demo.html 文件已被修改，如果要暂存这次修改，需要再次运行 git add 命令，这个命令是个多功能的命令，主要有如下三个功效：
+                    1.可以用它开始跟踪新文件
+                    2.把已跟踪的、且已修改的文件放到暂存区
+                    3.把有冲突的文件标记为已解决状态
+                ```
+                    Administrator@DESKTOP-N8LVVRV MINGW64 /d/project/Exercise/06Git (master)
+                    $ git add demo.html
+
+                    Administrator@DESKTOP-N8LVVRV MINGW64 /d/project/Exercise/06Git (master)
+                    $ git status
+                    On branch master
+                    Changes to be committed:
+                    (use "git reset HEAD <file>..." to unstage)
+
+                            modified:   demo.html
+
+
+                    Administrator@DESKTOP-N8LVVRV MINGW64 /d/project/Exercise/06Git (master)
+                    $ git status -s
+                    M  demo.html
                 ```
         (3) Github
         (4) Git分支
