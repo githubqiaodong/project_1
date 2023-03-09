@@ -406,7 +406,28 @@
                         git remote add origin https://github.com/githubqiaodong/project_1.git
                         git branch -M main
                         git push -u origin main
+
+                        # 再次提交只需要使用 git push 命令即可
+                        git push
                     ```
+                4.基于 SSH key 访问远程仓库
+                    SSH key的作用：实现本地仓库和Github之间免登录的加密数据传输
+                    SSH key的好处：免登录身份认证、数据加密传输
+                    SSH key由两部分组成，分别是：
+                        1.id_rsa（私钥文件，存放于客户端的电脑中即可）
+                        2.id_rsa.pub（公钥文件，需要配置到Github中）
+                    生成SSH key
+                        1.打开Git Bash
+                        2.粘贴如下的命令，将邮箱号替换为注册Github账号时填写的邮箱：
+                        ```
+                            ssh-keygen -t rsa -b 4096 -C "emailqiao@126.com"
+                        ```
+                        3.连续敲击3次回车，即可在 C:\Users\用户名文件夹\.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件
+                    配置SSH key
+                        1.使用记事本打开 id_rsa.pub 文件，复制里面的文本内容
+                        2.在浏览器中登录Github，点击头像——settings——SSH and GPG Keys——new SSH key
+                        3.将 id_rsa.pub 文件中的内容，粘贴到Key对应的文本框中
+                        4.在Title文本框中任意填写一个名称，来标识这个Key从何而来
         (4) Git分支
      -->
 </head>
