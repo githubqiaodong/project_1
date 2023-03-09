@@ -410,25 +410,74 @@
                         # 再次提交只需要使用 git push 命令即可
                         git push
                     ```
-                4.基于 SSH key 访问远程仓库
-                    SSH key的作用：实现本地仓库和Github之间免登录的加密数据传输
-                    SSH key的好处：免登录身份认证、数据加密传输
-                    SSH key由两部分组成，分别是：
-                        1.id_rsa（私钥文件，存放于客户端的电脑中即可）
-                        2.id_rsa.pub（公钥文件，需要配置到Github中）
-                    生成SSH key
-                        1.打开Git Bash
-                        2.粘贴如下的命令，将邮箱号替换为注册Github账号时填写的邮箱：
+                    4.基于 SSH key 访问远程仓库
+                        SSH key的作用：实现本地仓库和Github之间免登录的加密数据传输
+                        SSH key的好处：免登录身份认证、数据加密传输
+                        SSH key由两部分组成，分别是：
+                            1.id_rsa（私钥文件，存放于客户端的电脑中即可）
+                            2.id_rsa.pub（公钥文件，需要配置到Github中）
+                        生成SSH key
+                            1.打开Git Bash
+                            2.粘贴如下的命令，将邮箱号替换为注册Github账号时填写的邮箱：
+                            ```
+                                ssh-keygen -t rsa -b 4096 -C "emailqiao@126.com"
+                            ```
+                            3.连续敲击3次回车，即可在 C:\Users\用户名文件夹\.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件
+                        配置SSH key
+                            1.使用记事本打开 id_rsa.pub 文件，复制里面的文本内容
+                            2.在浏览器中登录Github，点击头像——settings——SSH and GPG Keys——new SSH key
+                            3.将 id_rsa.pub 文件中的内容，粘贴到Key对应的文本框中
+                            4.在Title文本框中任意填写一个名称，来标识这个Key从何而来
+                        检测 Github 的 SSH key 是否配置成功
+                            在 Git Bash 中输入如下命令：（ssh -T git@github.com）
+                            ```
+                                PS D:\project\Exercise\06Git> ssh -T git@github.com   
+                                The authenticity of host 'github.com (20.205.243.166)' can't be established.
+                                ECDSA key fingerprint is SHA256:p2QAMXNIC1TJYWeIOttrVc98/R1BUFWu3/LiyKgUfQM.
+                                Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+                                Warning: Permanently added 'github.com,20.205.243.166' (ECDSA) to the list of known hosts.
+                                Hi githubqiaodong! You've successfully authenticated, but GitHub does not provide shell access.
+                            ```
+                    5.基于 SSH 将本地仓库上传到Github
+                        只要配置好 SSH Key，其余上传方式和HTTPS大致相同
+                    6.将远程仓库克隆到本地
                         ```
-                            ssh-keygen -t rsa -b 4096 -C "emailqiao@126.com"
+                            git clone 远程仓库的地址
                         ```
-                        3.连续敲击3次回车，即可在 C:\Users\用户名文件夹\.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件
-                    配置SSH key
-                        1.使用记事本打开 id_rsa.pub 文件，复制里面的文本内容
-                        2.在浏览器中登录Github，点击头像——settings——SSH and GPG Keys——new SSH key
-                        3.将 id_rsa.pub 文件中的内容，粘贴到Key对应的文本框中
-                        4.在Title文本框中任意填写一个名称，来标识这个Key从何而来
         (4) Git分支
+            本地分支操作
+                1.分支的概念
+                    分支就是科幻电影里面的平行宇宙，当你正在电脑前努力学习Git的时候，另一个你正在另一个平行宇宙里努力学习SVN，如果两个平行宇宙互不干扰，那对现在的你也没啥影响。不过在某个时间点，两个平行宇宙合并了，结果，你即学会了Git又学会了SVN
+                2.分支在实际开发中的作用
+                    在进行多人协作开发的时候，为了防止互相干扰，提高协同开发的体验，建议每个开发者都基于分支进行项目功能的开发
+                    每个独立的功能，对应一个具体的分支。分支之间互不影响，能够提高开发的效率，例如：
+                        功能：登录 负责人：小兰 分支名称：login         登录 功能开发测试完毕之后，合并到master主分支
+                        功能：注册 负责人：小紫 分支名称：reg           注册 功能开发测试完毕之后，合并到master主分支
+                        功能：支付 负责人：小黄 分支名称：payment       支付 功能开发测试完毕之后，合并到master主分支
+                3.master主分支
+                    在初始化本地Git仓库的时候，Git默认已经帮我们创建了一个名字叫做master的分支。通常我们把这个master分支叫做主分支
+                    在实际工作中，master主分支的作用是：用来保存和记录整个项目已经完成的功能代码。因此，不允许程序员直接在master主分支上修改代码，因为这样做的风险太高，容易导致整个项目崩溃
+                4.功能分支
+                    由于程序员不能直接在master分支上进行功能的开发，所以就有了功能分支的概念
+                    功能分支指的是专门用来开发新功能的分支，它是临时从master主分支上分叉出来的，当新功能开发且测试完毕后，最终需要合并到master主分支上（最后删除临时分支）
+                5.查看分支列表
+                    ```
+                        # 查看当前 Git 仓库中所有的分支列表（注意：分支名字前面的 * 表示当前所处的分支）
+                        git branch
+                        PS D:\project\Exercise\06Git> git branch
+                        * main
+                    ```
+                6.创建新分支
+                    使用如下的命令，可以基于当前分支，创建一个新的分支，此时，新分支中的代码和当前分支完全一样
+                    git branch 分支名称
+                    ```
+                        # 基于 main（master） 分支，创建出了 login 分支
+                        git branch login
+                    ```
+                    注意：执行完创建分支的命令之后，用户当前所处的还是 main 分支
+                7.切换分支
+                    使用如下的命令，可以切换到指定的分支上进行开发
+                    git checkout login
      -->
 </head>
 <body>
