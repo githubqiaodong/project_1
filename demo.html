@@ -478,6 +478,25 @@
                 7.切换分支
                     使用如下的命令，可以切换到指定的分支上进行开发
                     git checkout login
+                8.分支的快速创建和切换
+                    使用如下的命令，可以创建指定名称的新分支，并立即切换到新分支上
+                    ```
+                        # -b 表示创建一个新分支
+                        # checkout 表示切换到刚才新建的分支上
+                        git checkout -b 分支名称
+
+                        注意："git checkout -b 分支名称"是下面两条命令的简写形式：
+                        git branch 分支名称
+                        git checkout 分支名称
+                    ```
+                9.合并分支
+                    功能分支的代码开发测试完毕之后，可以使用如下的命令，将完成后的代码合并到 main 主分支上：
+                    ```
+                        # 1.切换到 main 分支
+                        git checkout main
+                        # 2.在 main 分支上运行 git merge 命令，将 login 分支的代码合并到 main 分支
+                        git merge login
+                    ```
      -->
 </head>
 <body>
